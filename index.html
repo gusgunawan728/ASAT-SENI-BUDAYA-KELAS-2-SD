@@ -2,359 +2,320 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>ASAT Seni Budaya Kelas 2 SD</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
 
 body{
-background:linear-gradient(
-180deg,
-#87CEEB,
-#FFD6EC,
-#FFF6B7
-);
-padding:20px;
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(#87CEEB,#FFD6EC,#FFF6B7);
 }
 
-.header{
-background:white;
-border-radius:30px;
-padding:20px;
-text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-margin-bottom:20px;
-}
-
-.header h1{
-font-size:48px;
-color:#ff5a5a;
-}
-
-.header h2{
-font-size:32px;
-color:#3c78d8;
-}
-
-.hero{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:20px;
-flex-wrap:wrap;
-margin-top:15px;
-}
-
-.hero img{
-width:120px;
-}
-
-.question{
-background:white;
-padding:20px;
-border-radius:25px;
-margin-bottom:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-}
-
-.question img{
-width:100px;
+.banner{
+width:100%;
 display:block;
+}
+
+.container{
+max-width:1200px;
 margin:auto;
+padding:15px;
 }
 
-.question h3{
-margin:10px 0;
-color:#ff6b00;
+h1{
+text-align:center;
+color:#ff4d6d;
 }
 
-.option{
+.soal{
+background:white;
+border-radius:20px;
+padding:15px;
+margin-bottom:15px;
+box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.nomor{
+background:#ff4d6d;
+color:white;
+padding:8px 14px;
+border-radius:50%;
+font-weight:bold;
+}
+
+.gambar{
+width:90px;
 display:block;
-margin:8px 0;
-padding:10px;
-border-radius:12px;
+margin:10px auto;
+}
+
+.opsi{
+padding:8px;
+margin:5px 0;
+border-radius:10px;
 background:#f4f4f4;
+display:block;
 cursor:pointer;
 }
 
-.option:hover{
-background:#dff4ff;
+.opsi:hover{
+background:#d6f0ff;
 }
 
 button{
-padding:15px 30px;
-font-size:18px;
-background:#4CAF50;
-color:white;
+display:block;
+margin:25px auto;
+padding:15px 35px;
+font-size:20px;
 border:none;
 border-radius:20px;
-cursor:pointer;
-display:block;
-margin:20px auto;
+background:#00b894;
+color:white;
 }
 
-.result{
+#hasil{
+display:none;
 background:white;
 padding:20px;
 border-radius:20px;
+text-align:center;
 font-size:24px;
-text-align:center;
-display:none;
+margin-bottom:30px;
 }
 
-.footer{
-margin-top:30px;
-text-align:center;
-font-weight:bold;
-font-size:20px;
-color:#444;
-}
 </style>
-
 </head>
+
 <body>
 
-<div class="header">
-<h1>🎨 ASAT SENI BUDAYA</h1>
-<h2>KELAS 2 SD</h2>
+<img src="banner.png" class="banner">
 
-<div class="hero">
-<img src="guru.png">
-<img src="siswa1.png">
-<img src="siswi1.png">
-</div>
+<div class="container">
 
-<h3>30 Soal Pilihan Ganda</h3>
-</div>
+<h1>🎨 ASAT SENI BUDAYA KELAS 2 SD</h1>
 
 <form id="quiz"></form>
 
-<button onclick="cekJawaban()">Lihat Nilai</button>
+<button type="button" onclick="cek()">Lihat Nilai</button>
 
-<div class="result" id="hasil"></div>
+<div id="hasil"></div>
 
-<div class="footer">
-🌟 Rajin Berlatih dan Berkarya 🌟
 </div>
 
 <script>
 
-const soal = [
+const soal=[
 
 {
 gambar:"palette.png",
-tanya:"1. Warna merah, kuning, dan biru disebut warna ...",
-pilihan:["Sekunder","Primer","Campuran"],
+tanya:"Warna merah, kuning dan biru disebut warna ....",
+opsi:["Sekunder","Primer","Campuran"],
 jawab:1
 },
 
 {
 gambar:"palette.png",
-tanya:"2. Warna hijau berasal dari campuran ...",
-pilihan:["Merah dan kuning","Biru dan kuning","Merah dan biru"],
+tanya:"Warna hijau berasal dari campuran ....",
+opsi:["Merah dan kuning","Biru dan kuning","Merah dan biru"],
 jawab:1
 },
 
 {
 gambar:"palette.png",
-tanya:"3. Daun biasanya berwarna ...",
-pilihan:["Hijau","Merah","Hitam"],
+tanya:"Warna daun biasanya ....",
+opsi:["Hijau","Merah","Hitam"],
 jawab:0
 },
 
 {
 gambar:"palette.png",
-tanya:"4. Garis lurus berbentuk ...",
-pilihan:["~~~~","_______","OOOO"],
+tanya:"Contoh garis lurus adalah ....",
+opsi:["~~~~","_____","○○○"],
 jawab:1
 },
 
 {
 gambar:"palette.png",
-tanya:"5. Bentuk bola menyerupai ...",
-pilihan:["Segitiga","Lingkaran","Persegi"],
+tanya:"Contoh garis lengkung adalah ....",
+opsi:["_____","~~~~","|||"],
 jawab:1
 },
 
 {
 gambar:"palette.png",
-tanya:"6. Alat untuk mewarnai adalah ...",
-pilihan:["Krayon","Sendok","Penggaris"],
+tanya:"Bentuk bola menyerupai ....",
+opsi:["Persegi","Lingkaran","Segitiga"],
+jawab:1
+},
+
+{
+gambar:"palette.png",
+tanya:"Krayon digunakan untuk ....",
+opsi:["Mewarnai","Memasak","Menjahit"],
 jawab:0
 },
 
 {
 gambar:"palette.png",
-tanya:"7. Kuas digunakan untuk ...",
-pilihan:["Melukis","Memotong","Menjahit"],
+tanya:"Kuas digunakan untuk ....",
+opsi:["Melukis","Mencuci","Memotong"],
 jawab:0
 },
 
 {
 gambar:"palette.png",
-tanya:"8. Menggambar pemandangan termasuk karya ...",
-pilihan:["Seni rupa","Olahraga","IPA"],
-jawab:0
+tanya:"Penghapus digunakan untuk ....",
+opsi:["Menulis","Menghapus tulisan","Menggambar"],
+jawab:1
 },
 
 {
 gambar:"palette.png",
-tanya:"9. Kolase dibuat dengan cara ...",
-pilihan:["Menempel","Mencuci","Menghapus"],
-jawab:0
-},
-
-{
-gambar:"palette.png",
-tanya:"10. Hasil gambar harus dijaga agar tidak ...",
-pilihan:["Bagus","Rusak","Indah"],
+tanya:"Pensil setelah digunakan harus ....",
+opsi:["Dibuang","Dirapikan","Disembunyikan"],
 jawab:1
 },
 
 {
 gambar:"musik.png",
-tanya:"11. Lagu dinyanyikan menggunakan ...",
-pilihan:["Mulut","Kaki","Tangan"],
+tanya:"Bunyi yang keras disebut ....",
+opsi:["Kuat","Lemah","Pelan"],
 jawab:0
 },
 
 {
 gambar:"musik.png",
-tanya:"12. Lagu cepat memiliki tempo ...",
-pilihan:["Cepat","Lambat","Sedih"],
+tanya:"Lagu cepat memiliki tempo ....",
+opsi:["Cepat","Lambat","Sedang"],
 jawab:0
 },
 
 {
 gambar:"musik.png",
-tanya:"13. Lagu nina bobo biasanya bertempo ...",
-pilihan:["Cepat","Lambat","Keras"],
+tanya:"Lagu nina bobo bertempo ....",
+opsi:["Cepat","Lambat","Keras"],
 jawab:1
 },
 
 {
 gambar:"musik.png",
-tanya:"14. Kendang dimainkan dengan cara ...",
-pilihan:["Dipukul","Digoyang","Ditiup"],
+tanya:"Kendang dimainkan dengan cara ....",
+opsi:["Dipukul","Digoyang","Ditiup"],
 jawab:0
 },
 
 {
 gambar:"musik.png",
-tanya:"15. Angklung dimainkan dengan cara ...",
-pilihan:["Dipukul","Digoyang","Ditiup"],
+tanya:"Pianika dimainkan dengan cara ....",
+opsi:["Dipukul","Ditiup","Digoyang"],
 jawab:1
 },
 
 {
 gambar:"musik.png",
-tanya:"16. Pianika dimainkan dengan cara ...",
-pilihan:["Ditiup","Dipukul","Digoyang"],
+tanya:"Angklung dimainkan dengan cara ....",
+opsi:["Digoyang","Dipukul","Ditiup"],
 jawab:0
 },
 
 {
 gambar:"musik.png",
-tanya:"17. Saat bernyanyi harus ...",
-pilihan:["Berteriak","Tertib","Berlari"],
-jawab:1
+tanya:"Saat bernyanyi harus ....",
+opsi:["Tertib","Berteriak","Bermain"],
+jawab:0
 },
 
 {
 gambar:"musik.png",
-tanya:"18. Not musik digunakan untuk ...",
-pilihan:["Mencatat nada","Menghapus","Memasak"],
+tanya:"Not musik digunakan untuk ....",
+opsi:["Nada","Masak","Olahraga"],
 jawab:0
 },
 
 {
 gambar:"tari.png",
-tanya:"19. Menari menggunakan anggota ...",
-pilihan:["Tubuh","Rumah","Sekolah"],
+tanya:"Menari menggunakan anggota ....",
+opsi:["Tubuh","Rumah","Sekolah"],
 jawab:0
 },
 
 {
 gambar:"tari.png",
-tanya:"20. Gerak kelinci termasuk gerak ...",
-pilihan:["Hewan","Tumbuhan","Benda"],
+tanya:"Gerakan kelinci termasuk gerak ....",
+opsi:["Hewan","Tumbuhan","Benda"],
 jawab:0
 },
 
 {
 gambar:"tari.png",
-tanya:"21. Menirukan pohon tertiup angin termasuk gerak ...",
-pilihan:["Tumbuhan","Hewan","Kendaraan"],
+tanya:"Pohon tertiup angin termasuk gerak ....",
+opsi:["Tumbuhan","Hewan","Kendaraan"],
 jawab:0
 },
 
 {
 gambar:"tari.png",
-tanya:"22. Saat menari bersama harus ...",
-pilihan:["Kompak","Bertengkar","Mengejek"],
+tanya:"Saat menari bersama harus ....",
+opsi:["Kompak","Bertengkar","Mengejek"],
 jawab:0
 },
 
 {
 gambar:"tari.png",
-tanya:"23. Saat tampil harus ...",
-pilihan:["Takut","Percaya diri","Menangis"],
+tanya:"Saat tampil harus ....",
+opsi:["Takut","Percaya diri","Malu"],
 jawab:1
 },
 
 {
 gambar:"karya.png",
-tanya:"24. Karya teman harus kita ...",
-pilihan:["Hargai","Rusak","Buang"],
+tanya:"Karya teman harus kita ....",
+opsi:["Hargai","Rusak","Buang"],
 jawab:0
 },
 
 {
 gambar:"karya.png",
-tanya:"25. Jika teman menggambar bagus kita berkata ...",
-pilihan:["Jelek","Bagus sekali","Tidak suka"],
+tanya:"Jika teman menggambar bagus kita berkata ....",
+opsi:["Jelek","Bagus sekali","Tidak suka"],
 jawab:1
 },
 
 {
 gambar:"karya.png",
-tanya:"26. Pemandangan termasuk objek gambar ...",
-pilihan:["Alam","Mesin","Robot"],
+tanya:"Kolase dibuat dengan cara ....",
+opsi:["Menempel","Membuang","Mencuci"],
 jawab:0
 },
 
 {
 gambar:"karya.png",
-tanya:"27. Botol bekas dapat dibuat menjadi ...",
-pilihan:["Kerajinan","Sampah","Batu"],
+tanya:"Gunung dan sawah termasuk gambar ....",
+opsi:["Pemandangan","Hewan","Kendaraan"],
 jawab:0
 },
 
 {
 gambar:"karya.png",
-tanya:"28. Menghargai karya orang lain disebut ...",
-pilihan:["Apresiasi","Marah","Bermain"],
+tanya:"Botol bekas dapat dibuat menjadi ....",
+opsi:["Kerajinan","Sampah","Batu"],
 jawab:0
 },
 
 {
 gambar:"karya.png",
-tanya:"29. Galeri seni digunakan untuk ...",
-pilihan:["Memajang karya","Memasak","Tidur"],
-jawab:0
+tanya:"Hasil karya harus dijaga agar tidak ....",
+opsi:["Bagus","Rusak","Bersih"],
+jawab:1
 },
 
 {
 gambar:"karya.png",
-tanya:"30. Belajar seni budaya bermanfaat untuk ...",
-pilihan:["Kreativitas","Malas","Bertengkar"],
+tanya:"Belajar seni budaya bermanfaat untuk ....",
+opsi:["Kreativitas","Malas","Bertengkar"],
 jawab:0
 }
 
@@ -363,47 +324,62 @@ jawab:0
 const quiz=document.getElementById("quiz");
 
 soal.forEach((s,i)=>{
+
 let html=`
-<div class="question">
-<img src="${s.gambar}">
+<div class="soal">
+
+<span class="nomor">${i+1}</span>
+
+<img src="${s.gambar}" class="gambar">
+
 <h3>${s.tanya}</h3>
 `;
 
-s.pilihan.forEach((p,j)=>{
+s.opsi.forEach((o,j)=>{
 html+=`
-<label class="option">
+<label class="opsi">
 <input type="radio" name="q${i}" value="${j}">
-${p}
-</label>`;
+${o}
+</label>
+`;
 });
 
-html+=`</div>`;
+html+="</div>";
+
 quiz.innerHTML+=html;
+
 });
 
-function cekJawaban(){
+function cek(){
 
-let skor=0;
+let benar=0;
 
 soal.forEach((s,i)=>{
+
 let pilih=document.querySelector(`input[name=q${i}]:checked`);
 
-if(pilih && parseInt(pilih.value)===s.jawab){
-skor++;
+if(pilih && Number(pilih.value)===s.jawab){
+benar++;
 }
+
 });
 
-let nilai=Math.round((skor/30)*100);
+let nilai=Math.round((benar/30)*100);
 
-document.getElementById("hasil").style.display="block";
+let hasil=document.getElementById("hasil");
 
-document.getElementById("hasil").innerHTML=
+hasil.style.display="block";
+
+hasil.innerHTML=
 `
-🏆 Jawaban Benar : ${skor} dari 30 Soal<br><br>
+🏆 Jawaban Benar : ${benar}/30<br><br>
 📚 Nilai : ${nilai}
 `;
+
 window.scrollTo(0,document.body.scrollHeight);
+
 }
+
 </script>
 
 </body>
