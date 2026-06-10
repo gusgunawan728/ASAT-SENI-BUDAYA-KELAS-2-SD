@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ASAT Seni Budaya Kelas 2 SD</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:linear-gradient(
+180deg,
+#87CEEB,
+#FFD6EC,
+#FFF6B7
+);
+padding:20px;
+}
+
+.header{
+background:white;
+border-radius:30px;
+padding:20px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+margin-bottom:20px;
+}
+
+.header h1{
+font-size:48px;
+color:#ff5a5a;
+}
+
+.header h2{
+font-size:32px;
+color:#3c78d8;
+}
+
+.hero{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:15px;
+}
+
+.hero img{
+width:120px;
+}
+
+.question{
+background:white;
+padding:20px;
+border-radius:25px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.question img{
+width:100px;
+display:block;
+margin:auto;
+}
+
+.question h3{
+margin:10px 0;
+color:#ff6b00;
+}
+
+.option{
+display:block;
+margin:8px 0;
+padding:10px;
+border-radius:12px;
+background:#f4f4f4;
+cursor:pointer;
+}
+
+.option:hover{
+background:#dff4ff;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:20px;
+cursor:pointer;
+display:block;
+margin:20px auto;
+}
+
+.result{
+background:white;
+padding:20px;
+border-radius:20px;
+font-size:24px;
+text-align:center;
+display:none;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+font-weight:bold;
+font-size:20px;
+color:#444;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+<h1>🎨 ASAT SENI BUDAYA</h1>
+<h2>KELAS 2 SD</h2>
+
+<div class="hero">
+<img src="guru.png">
+<img src="siswa1.png">
+<img src="siswi1.png">
+</div>
+
+<h3>30 Soal Pilihan Ganda</h3>
+</div>
+
+<form id="quiz"></form>
+
+<button onclick="cekJawaban()">Lihat Nilai</button>
+
+<div class="result" id="hasil"></div>
+
+<div class="footer">
+🌟 Rajin Berlatih dan Berkarya 🌟
+</div>
+
+<script>
+
+const soal = [
+
+{
+gambar:"palette.png",
+tanya:"1. Warna merah, kuning, dan biru disebut warna ...",
+pilihan:["Sekunder","Primer","Campuran"],
+jawab:1
+},
+
+{
+gambar:"palette.png",
+tanya:"2. Warna hijau berasal dari campuran ...",
+pilihan:["Merah dan kuning","Biru dan kuning","Merah dan biru"],
+jawab:1
+},
+
+{
+gambar:"palette.png",
+tanya:"3. Daun biasanya berwarna ...",
+pilihan:["Hijau","Merah","Hitam"],
+jawab:0
+},
+
+{
+gambar:"palette.png",
+tanya:"4. Garis lurus berbentuk ...",
+pilihan:["~~~~","_______","OOOO"],
+jawab:1
+},
+
+{
+gambar:"palette.png",
+tanya:"5. Bentuk bola menyerupai ...",
+pilihan:["Segitiga","Lingkaran","Persegi"],
+jawab:1
+},
+
+{
+gambar:"palette.png",
+tanya:"6. Alat untuk mewarnai adalah ...",
+pilihan:["Krayon","Sendok","Penggaris"],
+jawab:0
+},
+
+{
+gambar:"palette.png",
+tanya:"7. Kuas digunakan untuk ...",
+pilihan:["Melukis","Memotong","Menjahit"],
+jawab:0
+},
+
+{
+gambar:"palette.png",
+tanya:"8. Menggambar pemandangan termasuk karya ...",
+pilihan:["Seni rupa","Olahraga","IPA"],
+jawab:0
+},
+
+{
+gambar:"palette.png",
+tanya:"9. Kolase dibuat dengan cara ...",
+pilihan:["Menempel","Mencuci","Menghapus"],
+jawab:0
+},
+
+{
+gambar:"palette.png",
+tanya:"10. Hasil gambar harus dijaga agar tidak ...",
+pilihan:["Bagus","Rusak","Indah"],
+jawab:1
+},
+
+{
+gambar:"musik.png",
+tanya:"11. Lagu dinyanyikan menggunakan ...",
+pilihan:["Mulut","Kaki","Tangan"],
+jawab:0
+},
+
+{
+gambar:"musik.png",
+tanya:"12. Lagu cepat memiliki tempo ...",
+pilihan:["Cepat","Lambat","Sedih"],
+jawab:0
+},
+
+{
+gambar:"musik.png",
+tanya:"13. Lagu nina bobo biasanya bertempo ...",
+pilihan:["Cepat","Lambat","Keras"],
+jawab:1
+},
+
+{
+gambar:"musik.png",
+tanya:"14. Kendang dimainkan dengan cara ...",
+pilihan:["Dipukul","Digoyang","Ditiup"],
+jawab:0
+},
+
+{
+gambar:"musik.png",
+tanya:"15. Angklung dimainkan dengan cara ...",
+pilihan:["Dipukul","Digoyang","Ditiup"],
+jawab:1
+},
+
+{
+gambar:"musik.png",
+tanya:"16. Pianika dimainkan dengan cara ...",
+pilihan:["Ditiup","Dipukul","Digoyang"],
+jawab:0
+},
+
+{
+gambar:"musik.png",
+tanya:"17. Saat bernyanyi harus ...",
+pilihan:["Berteriak","Tertib","Berlari"],
+jawab:1
+},
+
+{
+gambar:"musik.png",
+tanya:"18. Not musik digunakan untuk ...",
+pilihan:["Mencatat nada","Menghapus","Memasak"],
+jawab:0
+},
+
+{
+gambar:"tari.png",
+tanya:"19. Menari menggunakan anggota ...",
+pilihan:["Tubuh","Rumah","Sekolah"],
+jawab:0
+},
+
+{
+gambar:"tari.png",
+tanya:"20. Gerak kelinci termasuk gerak ...",
+pilihan:["Hewan","Tumbuhan","Benda"],
+jawab:0
+},
+
+{
+gambar:"tari.png",
+tanya:"21. Menirukan pohon tertiup angin termasuk gerak ...",
+pilihan:["Tumbuhan","Hewan","Kendaraan"],
+jawab:0
+},
+
+{
+gambar:"tari.png",
+tanya:"22. Saat menari bersama harus ...",
+pilihan:["Kompak","Bertengkar","Mengejek"],
+jawab:0
+},
+
+{
+gambar:"tari.png",
+tanya:"23. Saat tampil harus ...",
+pilihan:["Takut","Percaya diri","Menangis"],
+jawab:1
+},
+
+{
+gambar:"karya.png",
+tanya:"24. Karya teman harus kita ...",
+pilihan:["Hargai","Rusak","Buang"],
+jawab:0
+},
+
+{
+gambar:"karya.png",
+tanya:"25. Jika teman menggambar bagus kita berkata ...",
+pilihan:["Jelek","Bagus sekali","Tidak suka"],
+jawab:1
+},
+
+{
+gambar:"karya.png",
+tanya:"26. Pemandangan termasuk objek gambar ...",
+pilihan:["Alam","Mesin","Robot"],
+jawab:0
+},
+
+{
+gambar:"karya.png",
+tanya:"27. Botol bekas dapat dibuat menjadi ...",
+pilihan:["Kerajinan","Sampah","Batu"],
+jawab:0
+},
+
+{
+gambar:"karya.png",
+tanya:"28. Menghargai karya orang lain disebut ...",
+pilihan:["Apresiasi","Marah","Bermain"],
+jawab:0
+},
+
+{
+gambar:"karya.png",
+tanya:"29. Galeri seni digunakan untuk ...",
+pilihan:["Memajang karya","Memasak","Tidur"],
+jawab:0
+},
+
+{
+gambar:"karya.png",
+tanya:"30. Belajar seni budaya bermanfaat untuk ...",
+pilihan:["Kreativitas","Malas","Bertengkar"],
+jawab:0
+}
+
+];
+
+const quiz=document.getElementById("quiz");
+
+soal.forEach((s,i)=>{
+let html=`
+<div class="question">
+<img src="${s.gambar}">
+<h3>${s.tanya}</h3>
+`;
+
+s.pilihan.forEach((p,j)=>{
+html+=`
+<label class="option">
+<input type="radio" name="q${i}" value="${j}">
+${p}
+</label>`;
+});
+
+html+=`</div>`;
+quiz.innerHTML+=html;
+});
+
+function cekJawaban(){
+
+let skor=0;
+
+soal.forEach((s,i)=>{
+let pilih=document.querySelector(`input[name=q${i}]:checked`);
+
+if(pilih && parseInt(pilih.value)===s.jawab){
+skor++;
+}
+});
+
+let nilai=Math.round((skor/30)*100);
+
+document.getElementById("hasil").style.display="block";
+
+document.getElementById("hasil").innerHTML=
+`
+🏆 Jawaban Benar : ${skor} dari 30 Soal<br><br>
+📚 Nilai : ${nilai}
+`;
+window.scrollTo(0,document.body.scrollHeight);
+}
+</script>
+
+</body>
+</html>
